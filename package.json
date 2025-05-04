@@ -1,0 +1,18 @@
+{
+  "name": "travel-website",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass:build": "sass assets/scss/style.scss assets/css/style.css",
+    "sass:watch": "sass --watch assets/scss/style.scss:assets/css/style.css",
+    "sass:prod": "sass assets/scss/style.scss assets/css/style.css --style compressed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "sass": "^1.87.0"
+  }
+}

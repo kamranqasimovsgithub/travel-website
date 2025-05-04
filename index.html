@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelON - Travel & Adventure</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+</head>
+<body>
+    <!-- Campaign Modal -->
+    <div class="campaign-modal">
+        <div class="modal-content">
+            <button class="btn modal-close" aria-label="Close Modal"><span>x</span></button>
+            <h3>Special Travel Offer!</h3>
+            <p>Get 20% off your next adventure with code <span class="badge bg-info">TRAVEL2025</span></p>
+            <a href="#booking" class="btn btn-primary">Book Now</a>
+        </div>
+    </div>
+
+    <!-- Cookies Policy Modal -->
+    <div class="cookies-modal">
+        <div class="modal-content">
+            <h3>Cookies Policy</h3>
+            <p>We use cookies to enhance your experience. This is a demo and does not store cookies.</p>
+            <button class="btn btn-primary cookies-accept">Accept</button>
+        </div>
+    </div>
+
+    <!-- Modal Sidebar Scroll -->
+    <div class="modal-sidebar">
+        <button class="sidebar-btn feedback-btn" aria-label="Open Feedback Form">
+            <i class="fa fa-comment"></i>
+        </button>
+        <button class="sidebar-btn scroll-top" aria-label="Scroll to Top">
+            <i class="fa fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div class="feedback-modal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close Modal">×</button>
+            <h3>Share Your Feedback</h3>
+            <form id="feedback-form">
+                <div class="form-group">
+                    <label for="feedback-name">Name</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="feedback-name" name="name" required>
+                        <i class="fa fa-exclamation-circle error-icon"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="feedback-message">Feedback</label>
+                    <div class="input-wrapper">
+                        <textarea id="feedback-message" name="message" required></textarea>
+                        <i class="fa fa-exclamation-circle error-icon"></i>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Fullscreen Search Overlay -->
+    <div class="search-overlay">
+        <button class="search-overlay-close" aria-label="Close Search"><i class="fa fa-times"></i> Close</button>
+        <div class="search-overlay-content">
+            <input type="text" id="search-overlay-input" placeholder="Search destinations..." aria-label="Search Destinations">
+            <ul class="search-suggestions" id="search-suggestions"></ul>
+        </div>
+    </div>
+
+    <!-- Booking Success Modal -->
+    <div class="booking-success-modal">
+        <div class="modal-content">
+            <i class="fa fa-check-circle success-icon"></i>
+            <h3>Booking Confirmed!</h3>
+            <p>Your booking has been successfully processed.</p>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close Modal">×</button>
+            <h2 class="section-title">Checkout</h2>
+            <p class="section-subtitle">Review your booking and complete your order.</p>
+            <div class="checkout-content">
+                <div class="checkout-form">
+                    <h3>Guest Information</h3>
+                    <form id="checkout-form">
+                        <div class="form-group">
+                            <label for="full-name">Full Name</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="full-name" name="full-name" required>
+                                <i class="fa fa-exclamation-circle error-icon"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <div class="input-wrapper">
+                                <input type="email" id="email" name="email" required>
+                                <i class="fa fa-exclamation-circle error-icon"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <div class="input-wrapper">
+                                <input type="tel" id="phone" name="phone" required>
+                                <i class="fa fa-exclamation-circle error-icon"></i>
+                            </div>
+                        </div>
+                        <h3>Payment Information</h3>
+                        <div class="form-group">
+                            <label for="card-number">Card Number</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" required>
+                                <i class="fa fa-exclamation-circle error-icon"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expiry-date">Expiry Date</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+                                <i class="fa fa-exclamation-circle error-icon"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="cvv" name="cvv" placeholder="123" required>
+                                <i class="fa fa-exclamation-circle error-icon"></i>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Place Order</button>
+                    </form>
+                </div>
+                <div class="checkout-summary">
+                    <h3>Booking Summary</h3>
+                    <div class="summary-details">
+                        <p><strong>Destination:</strong> <span id="summary-destination"></span></p>
+                        <p><strong>Country:</strong> <span id="summary-country"></span></p>
+                        <p><strong>Travel Date:</strong> <span id="summary-date"></span></p>
+                        <p><strong>Guests:</strong> <span id="summary-guests"></span></p>
+                        <p><strong>Estimated Cost:</strong> <span id="summary-cost">$0</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="home" class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                <a href="#home" class="" aria-label="ExploreWorld Logo">
+                    <span class="logo-text">
+                        <span>T</span><span>r</span><span>a</span><span>v</span><span>e</span><span>l</span><span>ON</span>
+                    </span>
+                    
+                </a>
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+                
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#destinations" class="nav-link">Destinations</a></li>
+                    <li><a href="#hotels" class="nav-link">Hotels</a></li>
+                    <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="search-bar">
+                    
+                    <button class="search-icon-btn" aria-label="Open Search"><i class="fa fa-search"></i></button>
+                    <a href="#booking" class="btn btn-primary book-now">Book Now</a>
+                    
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section with Carousel -->
+    <section class="hero">
+        <div class="swiper hero-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="assets/image/hero1.webp" alt="Tropical Beach">
+                    <div class="hero-content">
+                        <h1>Discover Paradise</h1>
+                        <p>Explore breathtaking tropical beaches and crystal waters.</p>
+                        <a href="#booking" class="btn btn-primary">Book Now</a>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="assets/image/hero2.webp" alt="Mountain Adventure">
+                    <div class="hero-content">
+                        <h1>Adventure Awaits</h1>
+                        <p>Embark on thrilling mountain expeditions.</p>
+                        <a href="#booking" class="btn btn-primary">Book Now</a>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="assets/image/hero3.webp" alt="City Exploration">
+                    <div class="hero-content">
+                        <h1>Urban Escape</h1>
+                        <p>Discover vibrant cities and rich cultures.</p>
+                        <a href="#booking" class="btn btn-primary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <p class="section-subtitle">Your trusted partner in unforgettable travel experiences.</p>
+            <div class="about-content">
+                <img src="assets/image/about-img.jpg" alt="Travel Experience">
+                <div class="about-text">
+                    <h3>Why Choose ExploreWorld?</h3>
+                    <p>We craft personalized travel itineraries to make your journey seamless and memorable.</p>
+                    <a href="#contact" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values Section -->
+    <section id="values" class="values">
+        <div class="container">
+            <h2 class="section-title">Our Values</h2>
+            <p class="section-subtitle">What drives us to deliver exceptional travel experiences.</p>
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fa fa-globe"></i>
+                    <h3>Sustainability</h3>
+                    <p>We promote eco-friendly travel to preserve our planet.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fa fa-heart"></i>
+                    <h3>Passion</h3>
+                    <p>Our love for travel fuels unforgettable adventures.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fa fa-users"></i>
+                    <h3>Community</h3>
+                    <p>We support local communities and cultures.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Booking Section -->
+    <section id="booking" class="booking">
+        <div class="container">
+            <h2 class="section-title">Plan Your Trip</h2>
+            <p class="section-subtitle">Fill out the form to start your journey.</p>
+            <form class="booking-form" id="booking-form">
+                <div class="form-group">
+                    <label for="booking-country">Country</label>
+                    <div class="input-wrapper">
+                        <select id="booking-country" name="country" required>
+                            <option value="">Select Country</option>
+                        </select>
+                        <i class="fa fa-exclamation-circle error-icon"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="destination">Destination</label>
+                    <div class="input-wrapper">
+                        <select id="destination" name="destination" required>
+                            <option value="">Select Destination</option>
+                        </select>
+                        <i class="fa fa-exclamation-circle error-icon"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="date">Travel Date</label>
+                    <div class="input-wrapper">
+                        <input type="date" id="date" name="date" required>
+                        <i class="fa fa-exclamation-circle error-icon"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Guests</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="guests" name="guests" min="1" required>
+                        <i class="fa fa-exclamation-circle error-icon"></i>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="destinations">
+        <div class="container">
+            <h2 class="section-title">Top Destinations</h2>
+            <p class="section-subtitle">Explore our curated travel spots.</p>
+            <div class="destinations-grid">
+                <div class="destination-card">
+                    <img src="assets/image/about-img.jpg" alt="Bali">
+                    <h3>Bali</h3>
+                    <p>Relax in tropical paradise with stunning beaches.</p>
+                    <a href="#booking" class="btn btn-secondary book-now-btn" data-country="Indonesia" data-destination="Bali" data-price="120">Book Now</a>
+                </div>
+                <div class="destination-card">
+                    <img src="assets/image/hero1.webp" alt="Paris">
+                    <h3>Paris</h3>
+                    <p>Experience romance and culture in the City of Light.</p>
+                    <a href="#booking" class="btn btn-secondary book-now-btn" data-country="France" data-destination="Paris" data-price="200">Book Now</a>
+                </div>
+                <div class="destination-card">
+                    <img src="assets/image/new-york.jpg" alt="New York">
+                    <h3>New York</h3>
+                    <p>Discover the vibrant energy of the Big Apple.</p>
+                    <a href="#booking" class="btn btn-secondary book-now-btn" data-country="United States" data-destination="New York" data-price="150">Book Now</a>
+                </div>
+            </div>
+            <div class="swiper destinations-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide destination-card">
+                        <img src="assets/image/about-img.jpg" alt="Bali">
+                        <h3>Bali</h3>
+                        <p>Relax in tropical paradise with stunning beaches.</p>
+                        <a href="#booking" class="btn btn-secondary book-now-btn" data-country="Indonesia" data-destination="Bali" data-price="120">Book Now</a>
+                    </div>
+                    <div class="swiper-slide destination-card">
+                        <img src="assets/image/hero1.webp" alt="Paris">
+                        <h3>Paris</h3>
+                        <p>Experience romance and culture in the City of Light.</p>
+                        <a href="#booking" class="btn btn-secondary book-now-btn" data-country="France" data-destination="Paris" data-price="200">Book Now</a>
+                    </div>
+                    <div class="swiper-slide destination-card">
+                        <img src="assets/image/hero3.webp" alt="New York">
+                        <h3>New York</h3>
+                        <p>Discover the vibrant energy of the Big Apple.</p>
+                        <a href="#booking" class="btn btn-secondary book-now-btn" data-country="United States" data-destination="New York" data-price="150">Book Now</a>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hotel List Section -->
+    <section id="hotels" class="hotels">
+        <div class="container">
+            <h2 class="section-title">Find Your Destination</h2>
+            <p class="section-subtitle">Filter by destination, country, price, and rating.</p>
+            <form class="hotel-filter" id="hotel-filter">
+                <div class="form-group">
+                    <label for="destination-name">Destination Name</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="destination-name" name="destination-name" placeholder="e.g., Times Square">
+                        <i class="fa fa-exclamation-circle error-icon"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <div class="input-wrapper">
+                        <select id="country" name="country" required>
+                            <option value="">Select Country</option>
+                        </select>
+                        <i class="fa fa-exclamation-circle error-icon"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="price">Max Price (per night)</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="price" name="price" min="0" placeholder="e.g., 200">
+                        <i class="fa fa-exclamation-circle error-icon"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="rating">Min Rating</label>
+                    <div class="input-wrapper">
+                        <select id="rating" name="rating">
+                            <option value="0">Any</option>
+                            <option value="3">3 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="5">5 Stars</option>
+                        </select>
+                        <i class="fa fa-exclamation-circle error-icon"></i>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </form>
+            <div class="hotel-list" id="hotel-list">
+                <!-- Default Cards -->
+                <div class="hotel-card">
+                    <img src="assets/image/hero1.webp" alt="Times Square">
+                    <div class="hotel-card-content">
+                        <h3>Times Square</h3>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <p class="price">$150/night</p>
+                        <a href="#booking" class="btn btn-secondary book-now-btn" data-country="United States" data-destination="Times Square" data-price="150">Book Now</a>
+                    </div>
+                    <button class="like-btn" aria-label="Like Destination">
+                        <i class="fa fa-heart-o"></i>
+                        <i class="fa fa-heart"></i>
+                    </button>
+                </div>
+                <div class="hotel-card">
+                    <img src="assets/image/hero2.webp" alt="Hagia Sophia">
+                    <div class="hotel-card-content">
+                        <h3>Hagia Sophia</h3>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <p class="price">$200/night</p>
+                        <a href="#booking" class="btn btn-secondary book-now-btn" data-country="Türkiye" data-destination="Hagia Sophia" data-price="200">Book Now</a>
+                    </div>
+                    <button class="like-btn" aria-label="Like Destination">
+                        <i class="fa fa-heart-o"></i>
+                        <i class="fa fa-heart"></i>
+                    </button>
+                </div>
+                <div class="hotel-card">
+                    <img src="assets/image/hero3.webp" alt="Bali">
+                    <div class="hotel-card-content">
+                        <h3>Bali</h3>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <p class="price">$120/night</p>
+                        <a href="#booking" class="btn btn-secondary book-now-btn" data-country="Indonesia" data-destination="Bali" data-price="120">Book Now</a>
+                    </div>
+                    <button class="like-btn" aria-label="Like Destination">
+                        <i class="fa fa-heart-o"></i>
+                        <i class="fa fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="swiper hotels-slider">
+                <div class="swiper-wrapper" id="hotel-list-mobile">
+                    <div class="swiper-slide hotel-card">
+                        <img src="assets/image/hero1.webp" alt="Times Square">
+                        <div class="hotel-card-content">
+                            <h3>Times Square</h3>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <p class="price">$150/night</p>
+                            <a href="#booking" class="btn btn-secondary book-now-btn" data-country="United States" data-destination="Times Square" data-price="150">Book Now</a>
+                        </div>
+                        <button class="like-btn" aria-label="Like Destination">
+                            <i class="fa fa-heart-o"></i>
+                            <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="swiper-slide hotel-card">
+                        <img src="assets/image/hero2.webp" alt="Hagia Sophia">
+                        <div class="hotel-card-content">
+                            <h3>Hagia Sophia</h3>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <p class="price">$200/night</p>
+                            <a href="#booking" class="btn btn-secondary book-now-btn" data-country="Türkiye" data-destination="Hagia Sophia" data-price="200">Book Now</a>
+                        </div>
+                        <button class="like-btn" aria-label="Like Destination">
+                            <i class="fa fa-heart-o"></i>
+                            <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="swiper-slide hotel-card">
+                        <img src="assets/image/hero3.webp" alt="Bali">
+                        <div class="hotel-card-content">
+                            <h3>Bali</h3>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <p class="price">$120/night</p>
+                            <a href="#booking" class="btn btn-secondary book-now-btn" data-country="Indonesia" data-destination="Bali" data-price="120">Book Now</a>
+                        </div>
+                        <button class="like-btn" aria-label="Like Destination">
+                            <i class="fa fa-heart-o"></i>
+                            <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Travel Gallery</h2>
+            <p class="section-subtitle">Moments from around the world.</p>
+            <div class="gallery-grid" id="gallery-grid">
+                <div class="gallery-item">
+                    <img src="assets/image/gallery1.jpg" alt="Beach Sunset">
+                    <button class="like-btn" aria-label="Like Image">
+                        <i class="fa fa-heart-o"></i>
+                        <i class="fa fa-heart"></i>
+                    </button>
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/image/gallery31.jpg" alt="Mountain Peak">
+                    <button class="like-btn" aria-label="Like Image">
+                        <i class="fa fa-heart-o"></i>
+                        <i class="fa fa-heart"></i>
+                    </button>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                    <img src="assets/image/gallery32.jpg" alt="City Skyline">
+
+
+                    </div>
+                    <button class="like-btn" aria-label="Like Image">
+                        <i class="fa fa-heart-o"></i>
+                        <i class="fa fa-heart"></i>
+                    </button>
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/image/gallery4.jpg" alt="Cultural Festival">
+                    <button class="like-btn" aria-label="Like Image">
+                        <i class="fa fa-heart-o"></i>
+                        <i class="fa fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="swiper gallery-slider">
+                <div class="swiper-wrapper" id="gallery-grid-mobile">
+                    <div class="swiper-slide gallery-item">
+                        <img src="assets/image/gallery1.jpg" alt="Beach Sunset">
+                        <button class="like-btn" aria-label="Like Image">
+                            <i class="fa fa-heart-o"></i>
+                            <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="swiper-slide gallery-item">
+                        <img src="assets/image/gallery2.jpg" alt="Mountain Peak">
+                        <button class="like-btn" aria-label="Like Image">
+                            <i class="fa fa-heart-o"></i>
+                            <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="swiper-slide gallery-item">
+                        <img src="assets/image/gallery31.jpg" alt="City Skyline">
+                        <button class="like-btn" aria-label="Like Image">
+                            <i class="fa fa-heart-o"></i>
+                            <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="swiper-slide gallery-item">
+                        <img src="assets/image/gallery4.jpg" alt="Cultural Festival">
+                        <button class="like-btn" aria-label="Like Image">
+                            <i class="fa fa-heart-o"></i>
+                            <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <button class="btn btn-primary load-more" id="load-more">
+                Load More
+                <span class="spinner" style="display: none;">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews">
+        <video autoplay muted loop class="reviews-video">
+            <source src="assets/video/reviews-bg.mp4" type="video/mp4">
+        </video>
+        <div class="container">
+            <h2 class="section-title">Traveler Reviews</h2>
+            <p class="section-subtitle">Detailed experiences from our adventurers.</p>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <h4>Jane Doe</h4>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <p>"Our Bali trip was flawless!"</p>
+                    <span class="review-date">April 2025</span>
+                </div>
+                <div class="review-card">
+                    <h4>John Smith</h4>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                    </div>
+                    <p>"Paris was a dream."</p>
+                    <span class="review-date">March 2025</span>
+                </div>
+                <div class="review-card">
+                    <h4>Emily Brown</h4>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <p>"New York was incredible!"</p>
+                    <span class="review-date">February 2025</span>
+                </div>
+            </div>
+            <div class="swiper reviews-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide review-card">
+                        <h4>Jane Doe</h4>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <p>"Our Bali trip was flawless!"</p>
+                        <span class="review-date">April 2025</span>
+                    </div>
+                    <div class="swiper-slide review-card">
+                        <h4>John Smith</h4>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                        </div>
+                        <p>"Paris was a dream."</p>
+                        <span class="review-date">March 2025</span>
+                    </div>
+                    <div class="swiper-slide review-card">
+                        <h4>Emily Brown</h4>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <p>"New York was incredible!"</p>
+                        <span class="review-date">February 2025</span>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Travelers Say</h2>
+            <p class="section-subtitle">Hear from our happy adventurers.</p>
+            <div class="swiper testimonials-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial">
+                            <p>"An unforgettable trip to Bali!"</p>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <h4>Jane Doe</h4>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial">
+                            <p>"The Paris tour was a dream come true."</p>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                            </div>
+                            <h4>John Smith</h4>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial">
+                            <p>"Amazing adventure in New York."</p>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <h4>Emily Brown</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="section-subtitle">We’re here to help plan your next adventure.</p>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="name" name="name" required>
+                                <i class="fa fa-exclamation-circle error-icon"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <div class="input-wrapper">
+                                <input type="email" id="email" name="email" required>
+                                <i class="fa fa-exclamation-circle error-icon"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <div class="input-wrapper">
+                                <textarea id="message" name="message" required></textarea>
+                                <i class="fa fa-exclamation-circle error-icon"></i>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.95373531531636!3d-37.81627927975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf0727d1e0b1b1b1!2sVictoria!5e0!3m2!1sen!2sau!4v1635788571399!5m2!1sen!2sau" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ExploreWorld</h3>
+                    <p>Plan your next adventure with us.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#hotels">Hotels</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <p>123 Example St, Example City</p>
+                    <p>Email: <a href="mailto:info@exploreworld.com">info@travelON.com</a></p>
+                    <p>Phone: <a href="tel:+1234567890">+1234567890</a></p>
+                </div>
+                <div class="footer-column">
+                    <h4>Follow Us</h4>
+                    <ul class="social-media">
+                        <li><a href="#" aria-label="Instagram"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="#" aria-label="Facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" aria-label="Twitter"><i class="fa fa-twitter"></i></a></li>
+                        <!-- <li><a href="#" aria-label="Instagram"><img src="assets/image/instagram.svg" alt="Instagram"></a></li>
+                        <li><a href="#" aria-label="Facebook"><img src="assets/image/fb.svg" alt="Facebook"></a></li>
+                        <li><a href="#" aria-label="Twitter"><img src="assets/image/ic.svg" alt="Twitter"><i class="fa fa-envelope"></i></a></li> -->
+                    </ul>
+                    <div class="language-select">
+                        <label for="language">Language:</label>
+                        <select id="language" name="language">
+                            <option value="en">English</option>
+                            <option value="az">Azerbaijan</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 TravelON. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
