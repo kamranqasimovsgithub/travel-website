@@ -1181,6 +1181,9 @@ input, select, textarea {
 .footer .footer-content .footer-column .social-media img {
   width: 24px;
 }
+.footer .footer-content .footer-column .social-media svg {
+  margin-top: 5px;
+}
 .footer .footer-content .footer-column .language-select {
   margin-top: 20px;
 }
